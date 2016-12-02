@@ -1,0 +1,66 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+header {
+  padding: 20px 0;
+}
+
+header .row,
+footer .row {
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  font-weight: 200;
+  font-size: 30px;
+  color:#002b80;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-end;
+}
+
+header a {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.jumbotron p
+{
+text-align: center;
+font-size: 15px;
+}
+.jumbotron img
+{
+  width:  250px;
+  height: 500px;
+  padding:20px;
+  margin: 20px;
+}
+
+
+
+
+footer .col-sm-8 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.6;
+}
+footer p
+{
+  font-size:10px ;
+}
