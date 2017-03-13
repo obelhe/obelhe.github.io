@@ -25,15 +25,194 @@
    	</div>
   </header>
 
-  <section class="jumbotron">
-    <div class="container">
-      <div class="row text-center">
-        <h2>Coming Soon !</h2>
+
+<div class="container">
+
+      <div class="page-header">
+        <h1>Media Center on Microcontroller</h1>
       </div>
+<p>In this project, a Media Center was implemented on <a href="http://www.keil.com/support/man/docs/mcb1700/mcb1700_su_components.htm">MCB 1700 board</a> with <a href="http://www.keil.com/dd/chip/4868.htm">LPC1768</a>
+  microcontroller onboard, an <a href="http://www.arm.com/products/processors/cortex-m/cortex-m3.php">ARM Cortex-M3 </a>processor clocked at 150MHz, 512Kb
+  on-chip flash, joystick, and an LCD for graphical interface.
+  The development was done using <a href="http://www2.keil.com/mdk5/">MDK (Microcontroller Development Kit)</a>
+  The graphical interphace was implemented on the LCD, with its functionality including:
+  <ul>
+  <li>A Photo Gallery</li>
+  <li>An mp3 player</li>
+  <li>Games</li>
+</p>
+  </ul>
+</br>
+<figure>
+  <img class="center-block" src="http://i.imgur.com/rw034Z9.png" style="width:40%">
+  <figcaption class="text-center">MCB 1700 board</figcaption>
+</figure>
+
+<div class="MC layout">
+<div class="page-header">
+<h2> Media Center layout</h2>
+</div>
+<p>To keep track of the different functionalities selected by the user,
+  a global variable <code>page</code> was created, <code>page=0</code> being the home menu.
+  The variable <code>page</code> will get updated based on the user’s choices. Along with
+  the page number, a <code>line</code>, which is also a global variable that was created to track
+  the user's selection from the options provided (Audio stream, Photos, Game) and display the selected option by calling its function.
+  The crusor ">" was to help the user navigate the media center, and is controlled using the joystick on the board.
+</p></br>
+  <figure>
+<img class="center-block" src="http://i.imgur.com/3zlV1Ez.png" style="width:30%">
+<figcaption class="text-center">MC layout</figcaption>
+  </figure>
+</div>
+
+<div class="Audio streaming">
+  <div class="page-header">
+  <h2> Audio Streaming</h2>
+  </div>
+<p>
+After the user selects the “Audio Streaming” option from the media center’s homepage,
+a custome-made function will be called to start streaming audio via USB from the PC to the dev board.
+ The USB was used to connect to the PC, and disconnect when signaled to exit from the player,
+ it worked by disabling the <a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0471h/BABJGGFH.html">
+NVIC (Nested Vectored Interrupt Controller)</a> that was responsible for starting the stream.
+ The potentiometer on the board was used as adjust the volume of the on-board speaker.
+ Counter clockwise rotation of the pot increases the volume, whereas clockwise rotation
+ to the pot decreases the volume.
+</p>
+
+</div>
+
+<div class="Photo Gallery">
+  <div class="page-header">
+  <h2>Photo Gallery</h2>
+</div>
+<p>The pictures that ere to be displayed on the LCD has to be converted to bitmaps,
+  which were then converted to a C file that is then read into the program as an array
+  of unsigned chars- unsigned char can hold a value in the range of 0 to 255, which is enough
+  to represent 8-bit images. The LCD had a resolution of 640x420px, which meant that the images
+  had to be resized before turned into a bitmap in order to fit the LCD perfectly.</p>
 
 
-    </div>
-</section>
+</div>
+
+
+<div class="Game">
+<div class="page-header">
+<h2>Game </h2>
+</div>
+<p>This part of the Media Menter was the biggest in term of memory usage.
+   The game that was implemented was a modified version of Highway Madness. The premise behind the game
+   was that a user controls a car (with the joystick) and try to avoid other cars
+   while also trying to get as many gold coins as possible, then those gold coins
+   would be used to unlock more images from the Photo Gallery as a reward system.
+</p>
+<p>
+First to set the environment (Highway and cars), stock photos of a three–line highways,
+ and cars were edited so they can fit onto the LCD.
+ </p>
+
+</br></br>
+ <div class="row">
+
+   <div class="col-sm-4">
+       <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/SimpleYellowCarTopView.png?raw=true" style="width:40%">
+       <figcaption class="text-center">CPU-Car 1</figcaption>
+   </div>
+
+   <div class="col-sm-4">
+       <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/SimpleDarkBlueCarTopView.png?raw=true" style="width:40%">
+       <figcaption class="text-center">CPU-Car 2</figcaption>
+
+   </div>
+
+   <div class="col-sm-4">
+       <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/SimpleOrangeCarTopView.png?raw=true" style="width:40%" >
+       <figcaption class="text-center">CPU-Car 3</figcaption>
+
+   </div>
+ </div>
+</br>
+<div class="row">
+<div class="col-sm-4">
+  <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/SimplePinkCarTopView.png?raw=true" style="width:40%" >
+  <figcaption class="text-center">User's car</figcaption>
+
+</div>
+
+<div class="col-sm-4">
+  <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/Threelanes.png?raw=true" style="width:70%" >
+  <figcaption class="text-center"></br>Three lane highway</figcaption>
+
+</div>
+
+<div class="col-sm-4">
+  <img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/goldbitcoin.png" style="width:80%" >
+  <figcaption class="text-center">Gold coin</figcaption>
+
+</div>
+
+</div>
+</br></br>
+<p>
+The cars were superimposed on the background (the three-lane highway). The user is resnponsible for controlling the purple
+car at the bottom while the CPU handles all other cars. The user can move
+the car up, down, left, and right by using the joystick. Each car had it own function.
+For collision detection, 3 variables: <code>front_bumper</code>,<code>rear_bumper</code>, and <code>lane</code> were created to represent the cars and move them around the LCD.
+ If the user’s car <code>front_bumper</code> value is in between <code>rear_bumper</code>, and <code>front_bumper</code> of the CPU-controlled car
+and both cars are at the same <code>lane</code>, then a collision has occurred,
+ and thus the game is over. As for the gold coin, it generates randomly on the screen with the
+ help of the <a href="https://www.tutorialspoint.com/c_standard_library/c_function_rand.htm"><code>rand()</code></a>
+ function in C. The user’s score will be updated once the position of the gold coin
+  is between the <code>front_bumper</code>, and <code>rear_bumper</code> of the user’s car, and have the same <code>lane</code> value.
+
+
+</p>
+
+<div class="page-header">
+<h4> User's Car</h4>
+</div>
+<p>
+This function is responsible for polling the joystick's value and responds accordingly.
+If the user pressed right on the joystick, the function will delete the user’s car
+in it current position and prints it on the right lane while also updating the values
+for the <code>front_bumper</code>, and <code>rear_bumper</code>.</p>
+
+<div class="page-header">
+<h4>CPU-controlled cars</h4>
+</div>
+<p>Each time a CPU-controlled car function is called, the car is moved by 20px downwards towards the user’s car.</p>
+
+<div class="page-header">
+<h4> Gold coin</h4>
+</div>
+<p>When collision between the user’s car and the gold coin is detected, a variable <code>score</code> will be incremented by one.
+  After that the coin will be generated randomly on the LCD </p>
+</br></br>
+
+All the afromentioned functions are put inside an infinite while loop
+</br></br>
+</div>
+<div class="row">
+
+<img class="center-block" src="https://github.com/obelhe/obelhe.github.io/blob/master/contents/images/projects/Media%20Center/game_cars.png?raw=true" style="width:30%">
+<figcaption class="text-center">Highway madness</figcaption>
+</div>
+
+
+</br></br>
+The code for the game is available below.
+</br>
+<script src="https://gist.github.com/obelhe/11a16e7d2c40bcd39380153e2a2af27e.js"></script>
+
+
+
+
+
+</div>
+
+
+
+
 
 
 
